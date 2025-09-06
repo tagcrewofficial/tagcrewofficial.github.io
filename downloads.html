@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download | T.A.G Crew</title>
+    <link rel="preload" href="/assets/NiseSegaSonic_uG9581P7EbPM_Xr7k0J4C.TTF" as="font" type="font/ttf" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'NiseSegaSonic';
+            src: url('/assets/NiseSegaSonic_uG9581P7EbPM_Xr7k0J4C.TTF') format('truetype');
+            font-display: block;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'NiseSegaSonic', Arial, sans-serif;
+            background: linear-gradient(135deg, #4a1a5c 0%, #2d1b69 50%, #1e3a8a 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 60px;
+            background: #3d00d3;
+            backdrop-filter: blur(10px);
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+            margin: 0 40px;
+        }
+
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav a:hover:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ffd700;
+        }
+
+        .download-btn {
+            background: #000000;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn:hover {
+            background: #000000;
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.3);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 30px rgba(255,255,255,0.5);
+            }
+        }
+
+        .description {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .download-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .download-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .download-item h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .download-item p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .download-link {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .download-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            background: linear-gradient(45deg, #26c6da, #2e7d5e);
+        }
+
+        .coming-soon {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            opacity: 0.7;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav {
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .description {
+                font-size: 1.1rem;
+            }
+
+            .download-section {
+                padding: 20px;
+            }
+
+            .download-item {
+                padding: 20px;
+            }
+
+            .download-item h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav a {
+                font-size: 16px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/">
+            <img src="/assets/tagcrewlogo_prev_ui_fGd88pxpbqlBfr4Ru8xCJ.png" alt="T.A.G Crew Logo" class="logo">
+        </a>
+        <nav class="nav">
+            <a href="/about">About</a>
+            <a href="https://x.com/">News</a>
+            <a href="https://x.com/">Guides</a>
+            <a href="https://discord.gg/bBJAWGrpUc/">Discord</a>
+            <a href="/downloads" class="download-btn">Download</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">DOWNLOADS</h1>
+        
+        <p class="description">
+            Download the Available Versions of Tag Team!
+        </p>
+
+        <div class="download-section">
+            <div class="download-item">
+                <h3>Tag Team v1.0 Beta</h3>
+                <p>The first beta version of our Sonic 3 A.I.R. mod featuring team-based gameplay mechanics and new level designs.</p>
+                <span class="coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="download-item">
+                <h3>Tag Team Demo</h3>
+                <p>Try out a preview of our mod with limited levels and characters. Perfect for getting a taste of what's to come!</p>
+                <span class="coming-soon">In Development</span>
+            </div>
+
+            <div class="download-item">
+                <h3>Development Updates</h3>
+                <p>Stay up to date with our latest development progress, screenshots, and behind-the-scenes content.</p>
+                <a href="https://discord.gg/bBJAWGrpUc/" class="download-link">Join Discord</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

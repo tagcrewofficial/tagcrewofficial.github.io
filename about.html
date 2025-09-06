@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | T.A.G Crew</title>
+    <link rel="preload" href="/assets/NiseSegaSonic_uG9581P7EbPM_Xr7k0J4C.TTF" as="font" type="font/ttf" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'NiseSegaSonic';
+            src: url('/assets/NiseSegaSonic_uG9581P7EbPM_Xr7k0J4C.TTF') format('truetype');
+            font-display: block;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'NiseSegaSonic', Arial, sans-serif;
+            background: linear-gradient(135deg, #4a1a5c 0%, #2d1b69 50%, #1e3a8a 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 60px;
+            background: #3d00d3;
+            backdrop-filter: blur(10px);
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+            margin: 0 40px;
+        }
+
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav a:hover:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ffd700;
+        }
+
+        .download-btn {
+            background: #000000;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn:hover {
+            background: #000000;
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.3);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 30px rgba(255,255,255,0.5);
+            }
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .team-member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .team-member h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .logo-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo-showcase img {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-showcase img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav {
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .about-section {
+                padding: 20px;
+            }
+
+            .about-section h2 {
+                font-size: 2rem;
+            }
+
+            .about-section p {
+                font-size: 1rem;
+            }
+
+            .logo-showcase {
+                gap: 30px;
+            }
+
+            .logo-showcase img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav a {
+                font-size: 16px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/">
+            <img src="/assets/tagcrewlogo_prev_ui_fGd88pxpbqlBfr4Ru8xCJ.png" alt="T.A.G Crew Logo" class="logo">
+        </a>
+        <nav class="nav">
+            <a href="/about">About</a>
+            <a href="https://x.com/">News</a>
+            <a href="https://x.com/">Guides</a>
+            <a href="https://discord.gg/bBJAWGrpUc/">Discord</a>
+            <a href="/downloads" class="download-btn">Download</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">ABOUT T.A.G CREW</h1>
+
+        <div class="about-section">
+            <h2>Who We Are</h2>
+            <p>
+                T.A.G Crew is a passionate group of modders and developers dedicated to creating amazing experiences for the Sonic community. 
+                We specialize in developing high-quality mods for Sonic 3 A.I.R. (Angel Island Revisited), bringing new gameplay mechanics, 
+                characters, and adventures to one of the most beloved Sonic games.
+            </p>
+            <p>
+                Our flagship project, "Tag Team for Sonic 3 A.I.R.," introduces innovative team-based gameplay that allows players to 
+                experience Sonic 3 in completely new ways. We're committed to preserving the classic Sonic feel while adding modern 
+                enhancements and creative twists.
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>
+                Our goal is to enhance the Sonic 3 A.I.R. experience by creating mods that:
+            </p>
+            <p>• Introduce new gameplay mechanics and features</p>
+            <p>• Maintain the classic Sonic charm and feel</p>
+            <p>• Provide high-quality, polished experiences</p>
+            <p>• Foster community engagement and creativity</p>
+            <p>• Support the broader Sonic modding community</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Current Projects</h2>
+            <p>
+                <strong>Tag Team for Sonic 3 A.I.R.</strong> - Our main project that adds cooperative and competitive multiplayer 
+                elements to Sonic 3. Experience classic levels with friends in new and exciting ways!
+            </p>
+            <p>
+                We're always working on new features, improvements, and additional content. Stay tuned to our Discord server 
+                for the latest updates and development progress.
+            </p>
+        </div>
+
+        <div class="logo-showcase">
+            <img src="/assets/tagcrewlogo_prev_ui_fGd88pxpbqlBfr4Ru8xCJ.png" alt="T.A.G Crew Logo">
+            <img src="/assets/cool_icon_ftBU_gUEut5ObE4GXip_i.png" alt="Project Icon">
+        </div>
+
+        <div class="about-section">
+            <h2>Join Our Community</h2>
+            <p>
+                Want to stay updated on our latest projects? Join our Discord server to connect with other fans, 
+                get early access to beta releases, and participate in development discussions. We love hearing 
+                feedback from the community and often incorporate player suggestions into our mods.
+            </p>
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="https://discord.gg/bBJAWGrpUc/" style="background: linear-gradient(45deg, #5865f2, #4752c4); color: white; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; transition: all 0.3s ease;">
+                    Join Our Discord
+                </a>
+            </p>
+        </div>
+    </main>
+</body>
+</html>
