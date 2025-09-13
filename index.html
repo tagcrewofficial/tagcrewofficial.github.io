@@ -232,80 +232,60 @@
         }
     </style>
     <script>
-        let audioContext;
-        let audioBuffer;
-        let isAudioReady = false;
+        let audioReady = false;
+        const POOL_SIZE = 4;
+        const audioPool = [];
         
-        // Multiple aggressive unlock attempts
-        async function setupAudio() {
-            if (isAudioReady) return;
+        // Preload audio immediately on page load
+        function preloadAudio() {
+            for (let i = 0; i < POOL_SIZE; i++) {
+                const a = new Audio('/assets/MenuBleep.wav');
+                a.preload = 'auto';
+                a.volume = 0.3;
+                a.load(); // Force load immediately
+                audioPool.push(a);
+            }
+        }
+        
+        function enableAudio() {
+            if (audioReady) return;
+            audioReady = true;
+        }
+        
+        function playHoverSound() {
+            if (!audioReady) {
+                // Try to enable audio now if not ready
+                enableAudio();
+                return;
+            }
             
             try {
-                // Try Web Audio API approach
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Resume context if suspended
-                if (audioContext.state === 'suspended') {
-                    await audioContext.resume();
-                }
-                
-                // Load audio buffer
-                const response = await fetch('/assets/MenuBleep.wav');
-                const arrayBuffer = await response.arrayBuffer();
-                audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-                
-                isAudioReady = true;
-            } catch (error) {
-                // Fallback to HTML5 audio
-                console.log('Web Audio failed, using HTML5 audio');
+                const a = audioPool.find(x => x.paused);
+                const snd = a || audioPool[0];
+                snd.volume = 0.3;
+                snd.currentTime = 0;
+                snd.play().catch(() => {});
+            } catch (e) {
+                // Fallback: create new audio if pool fails
+                const fallback = new Audio('/assets/MenuBleep.wav');
+                fallback.volume = 0.3;
+                fallback.play().catch(() => {});
             }
         }
         
-        // Play sound using Web Audio API or fallback
-        function playHoverSound() {
-            if (isAudioReady && audioContext && audioBuffer) {
-                try {
-                    const source = audioContext.createBufferSource();
-                    const gainNode = audioContext.createGain();
-                    gainNode.gain.value = 0.3;
-                    source.buffer = audioBuffer;
-                    source.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    source.start(0);
-                } catch (e) {
-                    console.log('Audio play failed:', e);
-                }
-            }
-        }
-        
-        // Silently unlock audio on first natural interaction
-        async function unlockAudioSilently() {
-            await setupAudio();
-            if (isAudioReady) {
-                // Store that we've unlocked audio for this session
-                sessionStorage.setItem('audioUnlocked', 'true');
-                // Remove all unlock listeners
-                ['scroll', 'keydown', 'pointerdown', 'touchstart', 'click'].forEach(event => {
-                    document.removeEventListener(event, unlockAudioSilently);
-                });
-            }
-        }
-        
-        document.addEventListener('DOMContentLoaded', async function() {
-            const interactiveElements = document.querySelectorAll('.nav a, .learn-more-btn, .download-btn');
-            interactiveElements.forEach(element => {
-                element.addEventListener('mouseenter', playHoverSound);
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload audio files immediately
+            preloadAudio();
             
-            // Try immediate setup first
-            await setupAudio();
+            // Try to enable audio on any subtle interaction
+            document.addEventListener('mousemove', enableAudio, { once: true });
+            document.addEventListener('scroll', enableAudio, { once: true });
+            document.addEventListener('pointerdown', enableAudio, { once: true });
+            document.addEventListener('keydown', enableAudio, { once: true });
             
-            // If not ready, set up silent unlock on natural interactions
-            if (!isAudioReady) {
-                ['scroll', 'keydown', 'pointerdown', 'touchstart', 'click'].forEach(event => {
-                    document.addEventListener(event, unlockAudioSilently, { once: true, passive: true });
-                });
-            }
+            // Set up hover sounds
+            const els = document.querySelectorAll('.nav a, .learn-more-btn, .download-btn');
+            els.forEach(el => el.addEventListener('pointerenter', playHoverSound));
         });
     </script>
 </head>
